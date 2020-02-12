@@ -1,0 +1,47 @@
+[
+  {
+    "Value": "s",
+    "Predecessor": "",
+    "IncompatibleWith": "ss"
+  },
+  {
+    "Value": "y",
+    "Predecessor": "",
+    "IncompatibleWith": ""
+  },
+  {
+    "Value": "es",
+    "Predecessor": "",
+    "IncompatibleWith": ""
+  },
+  {
+    "Value": "ly",
+    "Predecessor": "",
+    "IncompatibleWith": ""
+  },
+  {
+    "Value": "ing",
+    "Predecessor": "",
+    "IncompatibleWith": ""
+  },
+  {
+    "Value": "ify",
+    "Predecessor": "",
+    "IncompatibleWith": ""
+  },
+  {
+    "Value": "lier",
+    "Predecessor": "ly",
+    "IncompatibleWith": ""
+  },
+  {
+    "Value": "lies",
+    "Predecessor": "ly",
+    "IncompatibleWith": ""
+  },
+  {
+    "Value": "ification",
+    "Predecessor": "ify",
+    "IncompatibleWith": ""
+  }
+]

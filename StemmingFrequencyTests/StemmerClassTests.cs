@@ -12,7 +12,6 @@ namespace StemmingFrequencyTests
         {
             var input = "Friend";
             var wordFrequency = new Stemmer(input).Frequency("Friend");
-
             Assert.Equal(1, wordFrequency);
         }
 
@@ -21,16 +20,14 @@ namespace StemmingFrequencyTests
         {
             var input = "Friend friend";
             var wordFrequency = new Stemmer(input).Frequency("friend");
-
             Assert.Equal(2, wordFrequency);
         }
 
         [Fact]
-        public void CanCountTwoSuffixedWords()
+        public void CanCountSuffixedWord()
         {
             var input = "Friends Friend";
             var wordFrequency = new Stemmer(input).Frequency("friend");
-
             Assert.Equal(2, wordFrequency);
         }
 
@@ -54,7 +51,7 @@ namespace StemmingFrequencyTests
         }
 
         [Fact]
-        public void CanCorrectlyCountRootFromSuffixedWord()
+        public void CanCountRootFromSuffixedWord()
         {
             var input = "Friend";
             var wordFrequency = new Stemmer(input).Frequency("friendly");
@@ -62,7 +59,7 @@ namespace StemmingFrequencyTests
         }
 
         [Fact]
-        public void CanCorrectlyCountRootWordFromSuffixedWordsGivenSuffixedWord()
+        public void CanCountRootWordFromSuffixedWordsGivenSuffixedWord()
         {
             var input = "classes classes";
             var wordFrequency = new Stemmer(input).Frequency("classification");
@@ -78,13 +75,10 @@ namespace StemmingFrequencyTests
         [InlineData("friend", 5)]
         [InlineData("friendly", 5)]
         [InlineData("classes", 3)]
-        public void CanCountSuffixedWordsInComplexSentence(string word, int expectedCount)
+        public void CanCountRootWordsInComplexSentence(string word, int expectedCount)
         {
-            //Arrange
             var input = "Friends are friendlier friendlies that are friendly and classify the friendly classification class. Flowery flowers flow through following the flower flows.";
-            //Act
             var wordFrequency = new Stemmer(input).Frequency(word);
-            //Assert
             Assert.Equal(expectedCount, wordFrequency);
 
         }

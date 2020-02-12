@@ -1,9 +1,0 @@
-C:\Users\driley\Documents\dylan\MISC\Stemmingfrequency\StemmingFrequency\StemmingFrequency\bin\Debug\netcoreapp2.1\StemmingFrequency.deps.json
-C:\Users\driley\Documents\dylan\MISC\Stemmingfrequency\StemmingFrequency\StemmingFrequency\bin\Debug\netcoreapp2.1\StemmingFrequency.dll
-C:\Users\driley\Documents\dylan\MISC\Stemmingfrequency\StemmingFrequency\StemmingFrequency\bin\Debug\netcoreapp2.1\StemmingFrequency.pdb
-C:\Users\driley\Documents\dylan\MISC\Stemmingfrequency\StemmingFrequency\StemmingFrequency\obj\Debug\netcoreapp2.1\StemmingFrequency.csproj.CoreCompileInputs.cache
-C:\Users\driley\Documents\dylan\MISC\Stemmingfrequency\StemmingFrequency\StemmingFrequency\obj\Debug\netcoreapp2.1\StemmingFrequency.AssemblyInfoInputs.cache
-C:\Users\driley\Documents\dylan\MISC\Stemmingfrequency\StemmingFrequency\StemmingFrequency\obj\Debug\netcoreapp2.1\StemmingFrequency.AssemblyInfo.cs
-C:\Users\driley\Documents\dylan\MISC\Stemmingfrequency\StemmingFrequency\StemmingFrequency\obj\Debug\netcoreapp2.1\StemmingFrequency.dll
-C:\Users\driley\Documents\dylan\MISC\Stemmingfrequency\StemmingFrequency\StemmingFrequency\obj\Debug\netcoreapp2.1\StemmingFrequency.pdb
-C:\Users\driley\Documents\dylan\MISC\Stemmingfrequency\StemmingFrequency\StemmingFrequency\obj\Debug\netcoreapp2.1\StemmingFrequency.csprojAssemblyReference.cache

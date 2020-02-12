@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -13,32 +15,17 @@ namespace StemmingFrequency
             get => _term;
             set => _term = Regex.Replace(value, "[^a-zA-Z0-9 ]+", "", RegexOptions.Compiled).ToLower(); 
         }
-        //PUT THIS INTO JSON FILE THAT CAN EASILY BE EXTENDED
-        private static Dictionary<string, string> SuffixesToRoot => new Dictionary<string, string>()
-        {
-            { "s", "" },
-            { "y", "" },
-            { "es", "" },
-            {"ly", "" },
-            {"ing", "" },
-            {"ify", "" },
-            {"lier", "y" },
-            {"lies", "ly" },
-            {"ification", "ify" },
-        };
 
-        private static Dictionary<string, string> SuffixesToRootExceptions => new Dictionary<string, string>()
-        {
-            { "s", "ss" }
-        };
+        private List<Suffix> Suffixes { get; }
 
-        private static List<String> SuffixesByLength =>
-            SuffixesToRoot.OrderByDescending(x => x.Key.Length).Select(x => x.Key).ToList();
+        private List<String> SuffixesByLength =>
+            Suffixes.Select(x => x.Value).OrderByDescending(x => x.Length).ToList();
         
 
         public Stemmer(string term)
         {
             Term = term;
+            Suffixes = JsonConvert.DeserializeObject<List<Suffix>>(File.ReadAllText("./Suffixes.json"));
         }
 
         public int Frequency(string word)
@@ -48,16 +35,8 @@ namespace StemmingFrequency
             var result = 0;
 
             foreach (var tw in termWords)
-            {
-                if (word == GetStem(tw))
+                 if (tw == word || GetStem(word) == GetStem(tw))
                     result++;
-                else if (tw == GetStem(word))
-                    result++;
-                else if (tw == word)
-                    result++;
-                else if(GetStem(word) == GetStem(tw))
-                    result++;
-            }
 
             return result;
         }
@@ -68,7 +47,8 @@ namespace StemmingFrequency
             while (ContainsAnySuffix(rootWord))
             {
                 var suffix = GetSuffix(rootWord);
-                rootWord = rootWord.Replace(suffix, SuffixesToRoot[suffix]);
+                var suffixPredecessor = Suffixes.Find(x => x.Value == suffix).Predecessor;
+                rootWord = rootWord.Replace(suffix, suffixPredecessor);
             }
 
             return rootWord;
@@ -76,16 +56,21 @@ namespace StemmingFrequency
 
         private bool ContainsSpecificSuffix(string word, string suffix)
         {
-            var wordEndsInSuffixException = SuffixesToRootExceptions.ContainsKey(suffix) &&
-                SuffixesToRootExceptions[suffix] == word.Substring(word.Length - SuffixesToRootExceptions[suffix].Length);
-
-            if (wordEndsInSuffixException)
+            if (suffix.Length > word.Length)
                 return false;
 
-            return suffix.Length > word.Length ? false : word.Substring(word.Length - suffix.Length).Contains(suffix);
+            var suffixIncompatibleWithWord =
+               Suffixes.FirstOrDefault(x => x.Value == suffix).IncompatibleWith == word.Substring(word.Length - suffix.Length);
+
+            if (suffixIncompatibleWithWord)
+                return false;
+
+            return word.Substring(word.Length - suffix.Length).Contains(suffix);
         }
+
         private bool ContainsAnySuffix(string word) =>
             SuffixesByLength.Any(x => ContainsSpecificSuffix(word, x));
+
         private string GetSuffix(string word) =>
             SuffixesByLength.Find(x => ContainsSpecificSuffix(word, x));
     }
